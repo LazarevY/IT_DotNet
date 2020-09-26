@@ -95,9 +95,9 @@ namespace Task01
 
     public class MatrixProcess
     {
-        public static ref Matrix SortBySum(ref Matrix m)
+        public static ref Matrix SortByNonDecreasingSum(ref Matrix m)
         {
-            Matrix m_cp = new Matrix(ref m);
+            Matrix matrixCopy = new Matrix(ref m);
             
             (int, int)[] indexSumArray = new (int, int)[m.Rows];
 
@@ -109,7 +109,7 @@ namespace Task01
             for (int rowIndex = 0; rowIndex < m.Rows; ++rowIndex)
             {
                 var rowDesc = indexSumArray[rowIndex];
-                m.SetRow(rowIndex, m_cp[rowDesc.Item1]);
+                m.SetRow(rowIndex, matrixCopy[rowDesc.Item1]);
             }
             return ref m;
         }

@@ -8,15 +8,15 @@ namespace Task01
     {
         public static void Main(string[] args)
         {
-            Matrix m = new Matrix(2, 2);
+            Matrix m = new Matrix(4, 4);
 
-            m.Set(6, 0, 0);
-            m.Set(2, 0, 1);
-            m.Set(3, 1, 0);
-            m.Set(4, 1, 1);
+            m.SetRow(0, new []{1,1,10,1});
+            m.SetRow(1, new []{1,2,3,4});
+            m.SetRow(2, new []{4,3,2,1});
+            m.SetRow(3, new []{1,1,5,1});
 
 
-            MatrixProcess.SortBySum(ref m);
+            MatrixProcess.SortByNonDecreasingSum(ref m);
             
             Console.WriteLine(m.ToString());
 
