@@ -36,9 +36,9 @@
         public override string ToString()
         {
             return $"Diamond name: {_name}\n" +
-                   $"Diamond weight in carats: {_weight}\n" +
+                   $"Diamond weight in carats: {_weight:######0.##}\n" +
                    $"Faceting quality: {_facetingQuality}\n" +
-                   $"Quality: {Quality()}";
+                   $"Quality: {Quality():######0.####}";
         }
     }
 }

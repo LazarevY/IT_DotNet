@@ -2,9 +2,9 @@ namespace Task04Lib
 {
     public enum DiamondColor
     {
-        White,
-        Blue,
-        Yellow
+        White = 0,
+        Blue = 1,
+        Yellow = 2
     }
 
     public class ColorizedDiamond : Diamond
@@ -44,10 +44,10 @@ namespace Task04Lib
         public override string ToString()
         {
             return $"Diamond name: {_name}\n" +
-                   $"Diamond weight in carats: {_weight}\n" +
+                   $"Diamond weight in carats: {_weight:######0.##}\n" +
                    $"Faceting quality: {_facetingQuality}\n" +
                    $"Color: {_color.ToString()}\n" +
-                   $"Quality: {Quality()}";
+                   $"Quality: {Quality():######0.####}";
         }
     }
 }
