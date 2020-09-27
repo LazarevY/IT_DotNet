@@ -78,6 +78,12 @@ namespace Task03
             return $"{_nominator}/{_denominator}";
         }
 
+        public override string NormalRepresent()
+        {
+            int whole = _nominator / _denominator;
+            return whole > 0 ? $"{whole}({_nominator % _denominator}/{_denominator})" : ToString();
+        }
+
         private static int Gdc(int a, int b)
         {
             while (true)
