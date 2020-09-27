@@ -1,11 +1,23 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 
 namespace Task02
 {
 
     internal class Program
     {
+
+        public static void SaveTableToFile(string fileName, string[] table)
+        {
+            using (StreamWriter sw = File.CreateText(fileName))
+            {
+                foreach (var s in table)
+                {
+                    sw.WriteLine(s);
+                }
+            }
+        }
 
         public static string[] FunctionValuesToString(
             (double, double)[] table,
@@ -49,9 +61,24 @@ namespace Task02
 
         public static void Main(string[] args)
         {
+            if (args.Length != 3)
+            {
+                Console.WriteLine("Command must be like this:A B N" +
+                                  "\nA and B - double values, A <= B, N - whole number");
+                Environment.Exit(-1);
+            }
             Func<double, double> fX = x => Math.Sin(x) * Math.Pow(Math.Cos(x), 2) * Math.Pow(Math.Exp(x), 3);
-            double xStart = 0, xEnd = 2;
-            int N = 5;
+
+            double xStart = Double.Parse(args[0]);
+            double xEnd = Double.Parse(args[1]);
+            int N = int.Parse(args[2]);
+
+            if (xStart > xEnd)
+            {
+                Console.WriteLine("B value must be more or equal than A!");
+                Environment.Exit(-1);
+            }
+
             var table = FunctionValues(fX, xStart, xEnd, (xEnd - xStart) / N);
 
             var strTab = FunctionValuesToString(table,
@@ -61,6 +88,8 @@ namespace Task02
             {
                 Console.WriteLine(s);
             }
+            
+            SaveTableToFile("out.txt", strTab);
 
         }
     }
