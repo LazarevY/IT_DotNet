@@ -2,19 +2,21 @@ namespace Task04Lib
 {
     public enum DiamondColor
     {
-        White, Blue, Yellow
+        White,
+        Blue,
+        Yellow
     }
+
     public class ColorizedDiamond : Diamond
     {
-
         private DiamondColor _color;
-        
+
         public ColorizedDiamond(
-            string name, 
-            double weight, 
-            int facetingQuality, 
-            DiamondColor color) 
-            : 
+            string name,
+            double weight,
+            int facetingQuality,
+            DiamondColor color)
+            :
             base(name, weight, facetingQuality)
         {
             _color = color;
@@ -37,6 +39,15 @@ namespace Task04Lib
                 default:
                     return base.Quality();
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Diamond name: {_name}\n" +
+                   $"Diamond weight in carats: {_weight}\n" +
+                   $"Faceting quality: {_facetingQuality}\n" +
+                   $"Color: {_color.ToString()}\n" +
+                   $"Quality: {Quality()}";
         }
     }
 }

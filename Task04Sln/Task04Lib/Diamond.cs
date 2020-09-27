@@ -32,5 +32,13 @@
             get => _facetingQuality;
             set => _facetingQuality = value;
         }
+
+        public override string ToString()
+        {
+            return $"Diamond name: {_name}\n" +
+                   $"Diamond weight in carats: {_weight}\n" +
+                   $"Faceting quality: {_facetingQuality}\n" +
+                   $"Quality: {Quality()}";
+        }
     }
 }
