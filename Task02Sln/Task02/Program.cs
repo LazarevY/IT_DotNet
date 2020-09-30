@@ -8,10 +8,11 @@ namespace Task02
     internal class Program
     {
 
-        public static void SaveTableToFile(string fileName, string[] table)
+        public static void SaveTableToFile(string fileName, string[] table, string header)
         {
             using (StreamWriter sw = File.CreateText(fileName))
             {
+                sw.WriteLine(header);
                 foreach (var s in table)
                 {
                     sw.WriteLine(s);
@@ -71,7 +72,7 @@ namespace Task02
 
             double xStart = Double.Parse(args[0]);
             double xEnd = Double.Parse(args[1]);
-            int N = int.Parse(args[2]);
+            int n = int.Parse(args[2]);
 
             if (xStart > xEnd)
             {
@@ -79,17 +80,18 @@ namespace Task02
                 Environment.Exit(-1);
             }
 
-            var table = FunctionValues(fX, xStart, xEnd, (xEnd - xStart) / N);
+            var table = FunctionValues(fX, xStart, xEnd, (xEnd - xStart) / n);
 
             var strTab = FunctionValuesToString(table,
                 "{0,10:######0.000}{1,25:#####0.00000000}");
 
+            Console.WriteLine($"{"x",10}{"f(x)",25}");
             foreach (var s in strTab)
             {
                 Console.WriteLine(s);
             }
             
-            SaveTableToFile("out.txt", strTab);
+            SaveTableToFile("out.txt", strTab, $"{"x",10}{"f(x)",25}");
 
         }
     }
