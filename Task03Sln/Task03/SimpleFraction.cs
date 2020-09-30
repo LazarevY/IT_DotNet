@@ -32,7 +32,7 @@ namespace Task03
             SimpleFraction casted = (SimpleFraction) other;
             return new SimpleFraction(
                 _nominator * casted._denominator + casted.Nominator * _denominator,
-                this._denominator * casted._denominator).Reduced();
+                _denominator * casted._denominator).Reduced();
         }
 
         public override Number Sub(Number other)
@@ -40,23 +40,24 @@ namespace Task03
             SimpleFraction casted = (SimpleFraction) other;
             return new SimpleFraction(
                 _nominator * casted._denominator - casted.Nominator * _denominator,
-                this._denominator * casted._denominator).Reduced();
+                _denominator * casted._denominator).Reduced();
         }
 
         public override Number Multiply(Number other)
         {
             SimpleFraction casted = (SimpleFraction) other;
             return new SimpleFraction(
-                this._nominator * casted._nominator,
-                this._denominator * casted._denominator);
+                _nominator * casted._nominator,
+                _denominator * casted._denominator);
         }
 
         public override Number Divide(Number other)
         {
             SimpleFraction casted = (SimpleFraction) other;
+            int sign = (_nominator * casted._nominator) / Math.Abs(_nominator * casted._nominator);
             return new SimpleFraction(
-                this._nominator * casted._denominator,
-                this._denominator * casted._nominator);
+                Math.Abs(_nominator * casted._denominator) * sign,
+                Math.Abs(_denominator * casted._nominator));
         }
 
         public void Reduce()
@@ -75,13 +76,20 @@ namespace Task03
 
         public override string ToString()
         {
-            return $"{_nominator}/{_denominator}";
+            SimpleFraction s = Reduced();
+            return $"{s.Nominator}/{s.Denominator}";
         }
 
         public override string NormalRepresent()
         {
-            int whole = _nominator / _denominator;
-            return whole > 0 ? $"{whole}({_nominator % _denominator}/{_denominator})" : ToString();
+            if (_nominator == 0)
+                return "0";
+            SimpleFraction s = Reduced();
+            int whole = s.Nominator / s.Denominator;
+            int wholeUnsigned = Math.Abs(whole);
+            return wholeUnsigned > 0 ? 
+                (s.Nominator  % s.Denominator != 0? $"{whole}({Math.Abs(s.Nominator) % s.Denominator}/{s.Denominator})" : 
+                    $"{whole}") : ToString();
         }
 
         private static int Gdc(int a, int b)

@@ -100,5 +100,14 @@ namespace Task03Tests
             Assert.AreEqual(30,div.Nominator);
             Assert.AreEqual(12,div.Denominator);
         }
+        
+        public void Test010()
+        {
+            SimpleFraction f1 = new SimpleFraction(1,1);
+            SimpleFraction f2 = new SimpleFraction(1, 4);
+            SimpleFraction div = (SimpleFraction) f1.Multiply(f2);
+            Assert.AreEqual(1,div.Nominator);
+            Assert.AreEqual(4,div.Denominator);
+        }
     }
 }
