@@ -102,9 +102,17 @@ namespace Task03GUI
 
         private void DivideAction(object? sender, EventArgs eventArgs)
         {
-            SimpleFraction res = (SimpleFraction)_firstFraction.Divide(_secondFraction);
-            _resView.Text = res.ToString();
-            _resNormalView.Text = res.NormalRepresent();
+            try
+            {
+                SimpleFraction res = (SimpleFraction) _firstFraction.Divide(_secondFraction);
+                _resView.Text = res.ToString();
+                _resNormalView.Text = res.NormalRepresent();
+            }
+            catch (DivideByZeroException e)
+            {
+                _resView.Text = "Divide by zero!";
+                _resNormalView.Text = "Divide by zero!";
+            }
         }
     }
 }

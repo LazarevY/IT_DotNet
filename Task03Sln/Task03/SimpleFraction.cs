@@ -10,7 +10,7 @@ namespace Task03
         public SimpleFraction(int nominator, int denominator)
         {
             if (denominator == 0)
-                throw new ArgumentException("0 cannot be used as fraction denominator!");
+                throw new DivideByZeroException("0 cannot be used as fraction denominator!");
             _nominator = nominator;
             _denominator = denominator;
         }
@@ -53,11 +53,24 @@ namespace Task03
 
         public override Number Divide(Number other)
         {
-            SimpleFraction casted = (SimpleFraction) other;
-            int sign = (_nominator * casted._nominator) / Math.Abs(_nominator * casted._nominator);
-            return new SimpleFraction(
-                Math.Abs(_nominator * casted._denominator) * sign,
-                Math.Abs(_denominator * casted._nominator));
+            try
+            {
+                SimpleFraction casted = (SimpleFraction) other;
+                int sign = (_nominator * casted._nominator);
+                
+                if (sign == 0)
+                    sign = 1;
+                else
+                    sign /= Math.Abs(_nominator * casted._nominator);
+                return new SimpleFraction(
+                    Math.Abs(_nominator * casted._denominator) * sign,
+                    Math.Abs(_denominator * casted._nominator));
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
         }
 
         public void Reduce()
