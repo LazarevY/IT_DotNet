@@ -53,5 +53,22 @@ namespace Task01Tests
             Assert.AreEqual(4, m.Get(2,1));
         }
         
+        [Test]
+        public void Test005()
+        {
+            Matrix m = new Matrix(5,5);
+            m.SetRow(0, new []{2, 12, 4, 5, 8}); // 31
+            m.SetRow(1, new []{22, 16, -2, 33, 1}); // 70
+            m.SetRow(2, new []{0, 4, 20, 1, 3}); //28
+            m.SetRow(3, new []{1, 1, 1, 99, -5}); //97
+            m.SetRow(4, new []{10, 21, 30, 7, -5}); //63
+            MatrixProcess.SortByNonDecreasingSum(ref m);
+            Assert.AreEqual(0, m.Get(0,0));
+            Assert.AreEqual(2, m.Get(1,0));
+            Assert.AreEqual(10, m.Get(2,0));
+            Assert.AreEqual(22, m.Get(3,0));
+            Assert.AreEqual(1, m.Get(4,0));
+        }
+        
     }
 }
