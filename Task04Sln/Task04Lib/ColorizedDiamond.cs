@@ -9,8 +9,6 @@ namespace Task04Lib
 
     public class ColorizedDiamond : Diamond
     {
-        private DiamondColor _color;
-
         public ColorizedDiamond(
             string name,
             double weight,
@@ -19,18 +17,14 @@ namespace Task04Lib
             :
             base(name, weight, facetingQuality)
         {
-            _color = color;
+            Color = color;
         }
 
-        public DiamondColor Color
-        {
-            get => _color;
-            set => _color = value;
-        }
+        public DiamondColor Color { get; set; }
 
         public override double Quality()
         {
-            switch (_color)
+            switch (Color)
             {
                 case DiamondColor.Blue:
                     return base.Quality() + 1;
@@ -43,11 +37,8 @@ namespace Task04Lib
 
         public override string ToString()
         {
-            return $"Diamond name: {_name}\n" +
-                   $"Diamond weight in carats: {_weight:######0.##}\n" +
-                   $"Faceting quality: {_facetingQuality}\n" +
-                   $"Color: {_color.ToString()}\n" +
-                   $"Quality: {Quality():######0.####}";
+            return $"{base.ToString()}\n" +
+                   $"Color: {Color.ToString()}";
         }
     }
 }

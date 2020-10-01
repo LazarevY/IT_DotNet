@@ -2,42 +2,26 @@
 {
     public class Diamond
     {
-        protected string _name;
-        protected double _weight;
-        protected int _facetingQuality;
+        public string Name { get; set; }
+
+        public double Weight { get; set; }
+
+        public int FacetingQuality { get; set; }
 
         public Diamond(string name, double weight, int facetingQuality)
         {
-            _name = name;
-            _weight = weight;
-            _facetingQuality = facetingQuality;
+            Name = name;
+            Weight = weight;
+            FacetingQuality = facetingQuality;
         }
 
-        public virtual double Quality() => 0.4 * _weight + 0.6 * _facetingQuality;
-
-        public string Name
-        {
-            get => _name;
-            set => _name = value;
-        }
-
-        public double Weight
-        {
-            get => _weight;
-            set => _weight = value;
-        }
-
-        public int FacetingQuality
-        {
-            get => _facetingQuality;
-            set => _facetingQuality = value;
-        }
+        public virtual double Quality() => 0.4 * Weight + 0.6 * FacetingQuality;
 
         public override string ToString()
         {
-            return $"Diamond name: {_name}\n" +
-                   $"Diamond weight in carats: {_weight:######0.##}\n" +
-                   $"Faceting quality: {_facetingQuality}\n" +
+            return $"Diamond name: {Name}\n" +
+                   $"Diamond weight in carats: {Weight:######0.##}\n" +
+                   $"Faceting quality: {FacetingQuality}\n" +
                    $"Quality: {Quality():######0.####}";
         }
     }
