@@ -8,6 +8,10 @@ namespace Task01
 {
     public class Matrix
     {
+        private int[, ] _matrixBody;
+        private readonly int _rows;
+        private readonly int _cols;
+
         public Matrix(int rows, int cols)
         {
             _matrixBody = new int[rows, cols];
@@ -82,16 +86,11 @@ namespace Task01
 
             return b.ToString();
         }
-    
 
-    public int Rows => _rows;
+        public int Rows => _rows;
 
-    public int Cols => _cols;
-
-    private int[, ] _matrixBody;
-    private readonly int _rows;
-    private readonly int _cols;
-}
+        public int Cols => _cols;
+    }
 
     public class MatrixProcess
     {
