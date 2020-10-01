@@ -1,7 +1,7 @@
 using System;
 using Gtk;
 using UI = Gtk.Builder.ObjectAttribute;
-
+using Task02Lib;
 namespace Task02GUI
 {
     class MainWindow : Window
