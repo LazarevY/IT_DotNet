@@ -52,7 +52,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSpinButton">
+              <object class="GtkSpinButton" id="_valueAInput">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="adjustment">adjustment2</property>
@@ -88,7 +88,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSpinButton">
+              <object class="GtkSpinButton" id="_valueBInput">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="adjustment">adjustment3</property>
@@ -124,7 +124,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSpinButton">
+              <object class="GtkSpinButton" id="_valueNInput">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="adjustment">adjustment1</property>
@@ -143,7 +143,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkLabel" id="_pathLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>
@@ -154,22 +154,12 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Path to file</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton">
+          <object class="GtkButton" id="_calculateButton">
             <property name="label" translatable="yes">Calculate</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="CalculateAction" swapped="no"/>
           </object>
           <packing>
             <property name="left_attach">0</property>
@@ -178,9 +168,11 @@
           </packing>
         </child>
         <child>
-          <object class="GtkTextView">
+          <object class="GtkTextView" id="_outputArea">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
           </object>
           <packing>
             <property name="left_attach">0</property>
@@ -199,6 +191,19 @@
             <property name="left_attach">0</property>
             <property name="top_attach">3</property>
             <property name="width">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="_browsePath">
+            <property name="label" translatable="yes">Browse File</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="BrowseAction" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
           </packing>
         </child>
       </object>
