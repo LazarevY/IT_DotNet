@@ -1,30 +1,29 @@
 using System;
 using Gtk;
-using UI = Gtk.Builder.ObjectAttribute;
 using Task03;
+using UI = Gtk.Builder.ObjectAttribute;
 
 namespace Task03GUI
 {
-    class MainWindow : Window
+    internal class MainWindow : Window
     {
-        [UI] private SpinButton _firstFractionNominatorEdit;
-        [UI] private SpinButton _firstFractionDenominatorEdit;
-        [UI] private SpinButton _secondFractionNominatorEdit;
-        [UI] private SpinButton _secondFractionDenominatorEdit;
-
-        [UI] private Label _firstFractionView;
-        [UI] private Label _secondFractionView;
-
         [UI] private Button _addButton;
-        [UI] private Button _subButton;
-        [UI] private Button _multiplyButton;
         [UI] private Button _divideButton;
 
-        [UI] private Label _resView;
+        private readonly SimpleFraction _firstFraction;
+        [UI] private SpinButton _firstFractionDenominatorEdit;
+        [UI] private SpinButton _firstFractionNominatorEdit;
+
+        [UI] private Label _firstFractionView;
+        [UI] private Button _multiplyButton;
         [UI] private Label _resNormalView;
 
-        private SimpleFraction _firstFraction;
-        private SimpleFraction _secondFraction;
+        [UI] private Label _resView;
+        private readonly SimpleFraction _secondFraction;
+        [UI] private SpinButton _secondFractionDenominatorEdit;
+        [UI] private SpinButton _secondFractionNominatorEdit;
+        [UI] private Label _secondFractionView;
+        [UI] private Button _subButton;
 
         public MainWindow() : this(new Builder("MainWindow.glade"))
         {
@@ -33,9 +32,9 @@ namespace Task03GUI
         private MainWindow(Builder builder) : base(builder.GetObject("MainWindow").Handle)
         {
             builder.Autoconnect(this);
-            
-            _firstFraction = new SimpleFraction(1,1);
-            _secondFraction = new SimpleFraction(1,1);
+
+            _firstFraction = new SimpleFraction(1, 1);
+            _secondFraction = new SimpleFraction(1, 1);
 
             DeleteEvent += Window_DeleteEvent;
             _firstFractionNominatorEdit.ValueChanged += FirstFractionNominatorEditValueChanged;
@@ -82,20 +81,21 @@ namespace Task03GUI
 
         private void AddAction(object? sender, EventArgs eventArgs)
         {
-            SimpleFraction res = (SimpleFraction)_firstFraction.Add(_secondFraction);
+            var res = (SimpleFraction) _firstFraction.Add(_secondFraction);
             _resView.Text = res.ToString();
             _resNormalView.Text = res.NormalRepresent();
         }
 
         private void SubAction(object? sender, EventArgs eventArgs)
         {
-            SimpleFraction res = (SimpleFraction)_firstFraction.Sub(_secondFraction);
+            var res = (SimpleFraction) _firstFraction.Sub(_secondFraction);
             _resView.Text = res.ToString();
             _resNormalView.Text = res.NormalRepresent();
-        }        
+        }
+
         private void MultiplyAction(object? sender, EventArgs eventArgs)
         {
-            SimpleFraction res = (SimpleFraction)_firstFraction.Multiply(_secondFraction);
+            var res = (SimpleFraction) _firstFraction.Multiply(_secondFraction);
             _resView.Text = res.ToString();
             _resNormalView.Text = res.NormalRepresent();
         }
@@ -104,7 +104,7 @@ namespace Task03GUI
         {
             try
             {
-                SimpleFraction res = (SimpleFraction) _firstFraction.Divide(_secondFraction);
+                var res = (SimpleFraction) _firstFraction.Divide(_secondFraction);
                 _resView.Text = res.ToString();
                 _resNormalView.Text = res.NormalRepresent();
             }

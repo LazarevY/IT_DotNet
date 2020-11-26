@@ -2,7 +2,9 @@
 {
     public interface ITechnics
     {
-        bool Enabled { get;}
+        bool Enabled { get; }
+
+        string SerialNumber { get; }
 
         void TurnOn();
         void TurnOff();

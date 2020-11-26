@@ -1,20 +1,20 @@
 using System;
 using System.IO;
-using System.Linq;
 using Gtk;
-using UI = Gtk.Builder.ObjectAttribute;
 using Task02Lib;
+using UI = Gtk.Builder.ObjectAttribute;
+
 namespace Task02GUI
 {
-    class MainWindow : Window
+    internal class MainWindow : Window
     {
+        [UI] private Button _browsePath;
+        [UI] private Button _calculateButton;
+        [UI] private TextView _outputArea;
+        [UI] private Label _pathLabel;
         [UI] private SpinButton _valueAInput;
         [UI] private SpinButton _valueBInput;
         [UI] private SpinButton _valueNInput;
-        [UI] private Button _browsePath;
-        [UI] private Label _pathLabel;
-        [UI] private Button _calculateButton;
-        [UI] private TextView _outputArea;
 
 
         public MainWindow() : this(new Builder("MainWindow.glade"))
@@ -37,41 +37,38 @@ namespace Task02GUI
 
         private void CalculateAction(object sender, EventArgs args)
         {
-            double a = _valueAInput.Value;
-            double b = _valueBInput.Value;
+            var a = _valueAInput.Value;
+            var b = _valueBInput.Value;
 
-            if (a > b || Math.Abs(a-b) < 1e-6)
+            if (a > b || Math.Abs(a - b) < 1e-6)
             {
                 _outputArea.Buffer.Text = "Value A can't be greater or equal than value B!";
                 return;
             }
-            
-            int n = _valueNInput.ValueAsInt;
+
+            var n = _valueNInput.ValueAsInt;
 
             var values = Lib.FunctionValues(
-                (x => Math.Sin(x) * Math.Pow(Math.Cos(x), 2) * (3 / Math.Exp(x))), 
+                x => Math.Sin(x) * Math.Pow(Math.Cos(x), 2) * (3 / Math.Exp(x)),
                 a, b, (b - a) / n
-                );
+            );
             var strValues = Lib.FunctionValuesToString(values,
                 "{0,10:######0.000}{1,25:#####0.00000000}");
-            _outputArea.Buffer.Text = String.Join("\n", strValues);
-            
-            if (File.Exists(_pathLabel.Text))
-            {
-                Lib.SaveTableToFile(_pathLabel.Text, strValues, $"{"x",10}{"f(x)",25}");
-            }
+            _outputArea.Buffer.Text = string.Join("\n", strValues);
 
-        }        
+            if (File.Exists(_pathLabel.Text)) Lib.SaveTableToFile(_pathLabel.Text, strValues, $"{"x",10}{"f(x)",25}");
+        }
+
         private void BrowseAction(object sender, EventArgs a)
         {
-            var fcd= new FileChooserDialog("Choose file", this, FileChooserAction.Save);
-            fcd.AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
-            fcd.AddButton (Gtk.Stock.Open, Gtk.ResponseType.Ok);
-            fcd.DefaultResponse = Gtk.ResponseType.Ok;
+            var fcd = new FileChooserDialog("Choose file", this, FileChooserAction.Save);
+            fcd.AddButton(Stock.Cancel, ResponseType.Cancel);
+            fcd.AddButton(Stock.Open, ResponseType.Ok);
+            fcd.DefaultResponse = ResponseType.Ok;
             fcd.SelectMultiple = false;
 
-            Gtk.ResponseType response = (Gtk.ResponseType) fcd.Run ();
-            if (response == Gtk.ResponseType.Ok)
+            var response = (ResponseType) fcd.Run();
+            if (response == ResponseType.Ok)
             {
                 _pathLabel.Text = fcd.Filename;
                 if (!File.Exists(_pathLabel.Text))

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using Task02Lib;
 
 namespace Task02
@@ -18,9 +16,9 @@ namespace Task02
 
             Func<double, double> fX = x => Math.Sin(x) * Math.Pow(Math.Cos(x), 2) * Math.Pow(Math.Exp(x), 3);
 
-            double xStart = Double.Parse(args[0]);
-            double xEnd = Double.Parse(args[1]);
-            int n = int.Parse(args[2]);
+            var xStart = double.Parse(args[0]);
+            var xEnd = double.Parse(args[1]);
+            var n = int.Parse(args[2]);
 
             if (xStart > xEnd)
             {
@@ -34,10 +32,7 @@ namespace Task02
                 "{0,10:######0.000}{1,25:#####0.00000000}");
 
             Console.WriteLine($"{"x",10}{"f(x)",25}");
-            foreach (var s in strTab)
-            {
-                Console.WriteLine(s);
-            }
+            foreach (var s in strTab) Console.WriteLine(s);
 
             Lib.SaveTableToFile("out.txt", strTab, $"{"x",10}{"f(x)",25}");
         }

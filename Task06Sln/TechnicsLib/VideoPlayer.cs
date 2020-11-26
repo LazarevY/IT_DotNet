@@ -4,13 +4,16 @@ namespace TechnicsLib
 {
     public class VideoPlayer : Player
     {
-        public VideoPlayer()
+        public VideoPlayer(string serialNumber, string colorGamma, (int, int) dimension) : base(serialNumber)
         {
             CurrentMediaName = "Video " + new Random().Next();
+            ColorGamma = colorGamma;
+            Dimension = dimension;
         }
 
-        public string ColorGamma => "256 RGB colors";
-        public (int, int) Dimension => (480, 320);
+        public string ColorGamma { get; private set; }
+
+        public (int, int) Dimension { get; private set; }
 
         public bool Repeat { get; set; }
 
@@ -50,10 +53,16 @@ namespace TechnicsLib
         {
             CurrentMediaName = "Video " + new Random().Next();
         }
-        
+
         public void PreviousVideo()
         {
             CurrentMediaName = "Video " + new Random().Next();
+        }
+
+        public override string ToString()
+        {
+            return $"I am Video player.\nMy S\\N is {SerialNumber}.\n" +
+                   $"Color gamma: {ColorGamma}.\nResolution: {Dimension}";
         }
     }
 }

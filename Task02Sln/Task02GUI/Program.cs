@@ -1,17 +1,18 @@
 using System;
-using Gtk;
+using GLib;
+using Application = Gtk.Application;
 
 namespace Task02GUI
 {
-    class Program
+    internal class Program
     {
         [STAThread]
         public static void Main(string[] args)
         {
             Application.Init();
 
-            var app = new Application("org.Task02GUI.Task02GUI", GLib.ApplicationFlags.None);
-            app.Register(GLib.Cancellable.Current);
+            var app = new Application("org.Task02GUI.Task02GUI", ApplicationFlags.None);
+            app.Register(Cancellable.Current);
 
             var win = new MainWindow();
             app.AddWindow(win);

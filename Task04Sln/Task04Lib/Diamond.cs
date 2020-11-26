@@ -2,12 +2,6 @@
 {
     public class Diamond
     {
-        public string Name { get; set; }
-
-        public double Weight { get; set; }
-
-        public int FacetingQuality { get; set; }
-
         public Diamond(string name, double weight, int facetingQuality)
         {
             Name = name;
@@ -15,7 +9,16 @@
             FacetingQuality = facetingQuality;
         }
 
-        public virtual double Quality() => 0.4 * Weight + 0.6 * FacetingQuality;
+        public string Name { get; set; }
+
+        public double Weight { get; set; }
+
+        public int FacetingQuality { get; set; }
+
+        public virtual double Quality()
+        {
+            return 0.4 * Weight + 0.6 * FacetingQuality;
+        }
 
         public override string ToString()
         {

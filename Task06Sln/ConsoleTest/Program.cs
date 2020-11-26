@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using TechnicsLib;
 
 namespace ConsoleTest
@@ -8,12 +7,13 @@ namespace ConsoleTest
     {
         public static void Main(string[] args)
         {
-            VideoPlayer player = new VideoPlayer();
+            var player = new VideoPlayer("SN394347374", "22", (100, 100));
             player.TurnOn();
             player.Play();
             player.NextVideo();
             player.Play();
             player.TurnOff();
+            Console.WriteLine(player.ToString());
         }
     }
 }

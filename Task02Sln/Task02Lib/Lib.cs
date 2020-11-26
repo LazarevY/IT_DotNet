@@ -9,13 +9,10 @@ namespace Task02Lib
     {
         public static void SaveTableToFile(string fileName, string[] table, string header)
         {
-            using (StreamWriter sw = File.CreateText(fileName))
+            using (var sw = File.CreateText(fileName))
             {
                 sw.WriteLine(header);
-                foreach (var s in table)
-                {
-                    sw.WriteLine(s);
-                }
+                foreach (var s in table) sw.WriteLine(s);
             }
         }
 
@@ -25,12 +22,10 @@ namespace Task02Lib
         {
             var stringTable = new string[table.Length];
 
-            for (int row = 0; row < table.Length; ++row)
-            {
-                stringTable[row] = String.Format(format,
+            for (var row = 0; row < table.Length; ++row)
+                stringTable[row] = string.Format(format,
                     table[row].Item1,
                     table[row].Item2);
-            }
 
             return stringTable;
         }
@@ -44,19 +39,18 @@ namespace Task02Lib
             Debug.Assert(xStart < xEnd);
             Debug.Assert(xStep > 0);
 
-            int countValues = (int) ((xEnd - xStart) / xStep) + 1;
-            
+            var countValues = (int) ((xEnd - xStart) / xStep) + 1;
+
             var retTable = new (double, double)[countValues];
 
-         
-            for (int stepCounter = 0; stepCounter < countValues; ++stepCounter)
+
+            for (var stepCounter = 0; stepCounter < countValues; ++stepCounter)
             {
-                double x = xStart + stepCounter * xStep;
+                var x = xStart + stepCounter * xStep;
                 retTable[stepCounter] = (x, function(x));
             }
 
             return retTable;
-
         }
     }
 }

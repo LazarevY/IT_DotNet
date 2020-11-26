@@ -2,7 +2,7 @@ using System;
 using GLib;
 using Application = Gtk.Application;
 
-namespace Task03GUI
+namespace Task06GUI
 {
     internal class Program
     {
@@ -11,7 +11,7 @@ namespace Task03GUI
         {
             Application.Init();
 
-            var app = new Application("org.Task03GUI.Task03GUI", ApplicationFlags.None);
+            var app = new Application("org.Task06GUI.Task06GUI", ApplicationFlags.None);
             app.Register(Cancellable.Current);
 
             var win = new MainWindow();
