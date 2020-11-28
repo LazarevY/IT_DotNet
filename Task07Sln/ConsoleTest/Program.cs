@@ -14,8 +14,6 @@ namespace ConsoleTest
             {
                 Console.WriteLine(type.ToString());
             }
-
-            Console.WriteLine(typeof(VideoPlayer).IsAssignableFrom(typeof(ITechnics)));
         }
     }
 }
