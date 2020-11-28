@@ -1,19 +1,41 @@
 using System;
+using System.Collections.Generic;
 
 namespace TechnicsLib
 {
     public class VideoPlayer : Player
     {
-        public VideoPlayer(string serialNumber, string colorGamma, (int, int) dimension) : base(serialNumber)
+        public enum AudioCodecs
         {
-            CurrentMediaName = "Video " + new Random().Next();
-            ColorGamma = colorGamma;
-            Dimension = dimension;
+            MP3,
+            WMA,
+            FLAC
         }
 
-        public string ColorGamma { get; private set; }
+        public enum VideoCodecs
+        {
+            MKV,
+            H_264,
+            H_265,
+            TS
+        }
 
-        public (int, int) Dimension { get; private set; }
+        public VideoPlayer(
+            string serialNumber,
+            int ramMB,
+            HashSet<VideoCodecs> videoCodecs,
+            HashSet<AudioCodecs> audioCodecs) : base(serialNumber)
+        {
+            CurrentMediaName = "Video " + new Random().Next();
+            PlayerVideoCodecs = videoCodecs;
+            PlayerAudioCodecs = audioCodecs;
+            RamMB = ramMB;
+        }
+
+        public HashSet<VideoCodecs> PlayerVideoCodecs { get; }
+        public HashSet<AudioCodecs> PlayerAudioCodecs { get; }
+
+        public int RamMB { get; set; }
 
         public bool Repeat { get; set; }
 
@@ -61,8 +83,10 @@ namespace TechnicsLib
 
         public override string ToString()
         {
+            CodecsToString c = new CodecsToString();
             return $"I am Video player.\nMy S\\N is {SerialNumber}.\n" +
-                   $"Color gamma: {ColorGamma}.\nResolution: {Dimension}";
+                   $"Support video codecs {c.Process(PlayerVideoCodecs)}.\nSupport audio codecs: {c.Process(PlayerAudioCodecs)}\n" +
+                   $"Ram: {RamMB} MB";
         }
     }
 }
