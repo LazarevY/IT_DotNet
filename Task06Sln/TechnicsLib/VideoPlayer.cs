@@ -32,6 +32,15 @@ namespace TechnicsLib
             RamMB = ramMB;
         }
 
+        public VideoPlayer() : this(
+            "DEFAULT", 
+            16, 
+            new HashSet<VideoCodecs> {VideoCodecs.H_264},
+            new HashSet<AudioCodecs> {AudioCodecs.MP3})
+        {
+            
+        }
+
         public HashSet<VideoCodecs> PlayerVideoCodecs { get; }
         public HashSet<AudioCodecs> PlayerAudioCodecs { get; }
 
