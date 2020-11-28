@@ -9,11 +9,15 @@ namespace TechnicsLib
             CurrentMediaName = "Song 1";
         }
 
+        public AdvancedMusicPlayer() : this("DEFAULT")
+        {
+        }
+
         public bool Repeat { get; set; }
 
         public int Volume { get; set; }
 
-        public SimpleEqualizer EqualizerSettings { get; set; }
+        public SimpleEqualizer EqualizerSettings { get; set; } = new SimpleEqualizer();
 
         public void SetEqualizer(int low, int mid, int high)
         {
