@@ -14,7 +14,9 @@ namespace Task07GUI
                 {typeof(int), typeof(IntegerValueWidget)},
                 {typeof(uint), typeof(UnsignedValueWidget)},
                 {typeof(double), typeof(DoubleValueWidget)},
-                {typeof(string), typeof(StringValueWidget)}
+                {typeof(string), typeof(StringValueWidget)},
+                {typeof(bool), typeof(BooleanGetWidget)},
+                {typeof(object), typeof(ObjectValueWidget)}
             };
         }
         

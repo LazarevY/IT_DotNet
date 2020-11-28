@@ -17,7 +17,7 @@ namespace TechnicsLib
 
         public int Volume { get; set; }
 
-        public SimpleEqualizer EqualizerSettings { get; set; } = new SimpleEqualizer();
+        public SimpleEqualizer EqualizerSettings { get;} = new SimpleEqualizer();
 
         public void SetEqualizer(int low, int mid, int high)
         {

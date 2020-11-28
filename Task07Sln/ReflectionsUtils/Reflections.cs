@@ -62,5 +62,14 @@ namespace ReflectionsUtils
 
             return false;
         }
+
+        public Type TypeByName(string name)
+        {
+            var enumerable = Assembly.GetTypes().Where(type => type.Name.Equals(name));
+            List<Type> types = new List<Type>(enumerable);
+            if (types.Count != 1)
+                throw new ArgumentException($"Incorrect count classes of {name} : 0 or more than 1");
+            return types[0];
+        }
     }
 }

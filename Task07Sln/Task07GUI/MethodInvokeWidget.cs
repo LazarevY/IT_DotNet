@@ -17,8 +17,8 @@ namespace Task07GUI
         {
             Type = type;
             MethodInfo = methodInfo;
-            ColumnHomogeneous = true;
-            RowHomogeneous = true;
+            ColumnSpacing = 10;
+            RowSpacing = 10;
             InitForm();
         }
 

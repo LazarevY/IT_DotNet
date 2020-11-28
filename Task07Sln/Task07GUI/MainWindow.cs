@@ -1,6 +1,12 @@
 using System;
+using System.Collections;
+using System.Linq;
+using System.Reflection;
+using GLib;
 using Gtk;
+using ReflectionsUtils;
 using TechnicsLib;
+using Application = Gtk.Application;
 using UI = Gtk.Builder.ObjectAttribute;
 
 namespace Task07GUI
@@ -11,8 +17,49 @@ namespace Task07GUI
         [UI] private Entry _classLibPath;
         [UI] private Button _serachButton;
         [UI] private ComboBox _classComboBox;
-        private void ScanLib(object? sender, EventArgs eventArgs){}
-        private void LoadClass(object? sender, EventArgs eventArgs){}
+        private Reflections _reflections;
+
+        private void ScanLib(object? sender, EventArgs eventArgs)
+        {
+            _reflections = new Reflections("/home/lazarev/RiderProjects/IT_Tasks/IT_DotNet/Task06Sln/TechnicsLib/bin/Debug/TechnicsLib.dll");
+            var allImplementsOf = _reflections.AllImplementsOf(typeof(ITechnics));
+            
+            _classComboBox.Clear();
+            ListStore model = new ListStore(typeof(string), typeof(Type));
+            
+
+            foreach (var type in allImplementsOf)
+            {
+                model.AppendValues(type.Name, type);
+                CellRendererText c = new CellRendererText();
+                _classComboBox.PackStart(c, true);
+                _classComboBox.AddAttribute(c, "text", 0);
+            }
+            
+            _classComboBox.Model = model;
+
+        }
+
+        private void LoadClass(object? sender, EventArgs eventArgs)
+        {
+            foreach (var widget in _methodsContainer.Children)
+            {
+                _methodsContainer.Remove(widget);
+            }
+
+            TreeIter active;
+            _classComboBox.GetActiveIter(out active);
+
+            Type t = (Type) _classComboBox.Model.GetValue(active, 1);
+
+            foreach (var method in t.GetMethods())
+            {
+                _methodsContainer.PackStart(
+                    new MethodInvokeWidget<Type>(t, method),
+                    true, true, 1 );
+
+            }
+        }
 
         public MainWindow() : this(new Builder("MainWindow.glade"))
         {
@@ -23,11 +70,8 @@ namespace Task07GUI
             builder.Autoconnect(this);
 
             DeleteEvent += Window_DeleteEvent;
-            MethodInvokeWidget<VideoPlayer>
-            methodInvokeWidget = new MethodInvokeWidget<VideoPlayer>(typeof(AdvancedMusicPlayer), typeof(AdvancedMusicPlayer).GetMethod("SetEqualizer"));
-            _methodsContainer.PackStart(methodInvokeWidget, true, true, 0);
-            _methodsContainer.ShowAll();
         }
+        
 
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
         {
