@@ -16,6 +16,7 @@ namespace Task07GUI
         [UI] private Box _methodsContainer;
         [UI] private Entry _classLibPath;
         [UI] private Button _serachButton;
+        [UI] private Button _browseButton;
         [UI] private ComboBox _classComboBox;
         private Reflections _reflections;
 
@@ -59,6 +60,22 @@ namespace Task07GUI
                     true, true, 1 );
 
             }
+        }
+        private void Browse(object? sender, EventArgs eventArgs)
+        {
+            var fcd = new FileChooserDialog("Choose file", this, FileChooserAction.Open);
+            fcd.AddButton(Stock.Cancel, ResponseType.Cancel);
+            fcd.AddButton(Stock.Open, ResponseType.Ok);
+            fcd.DefaultResponse = ResponseType.Ok;
+            fcd.SelectMultiple = false;
+
+            var response = (ResponseType) fcd.Run();
+            if (response == ResponseType.Ok)
+            {
+                _classLibPath.Text = fcd.Filename;
+            }
+
+            fcd.Dispose();
         }
 
         public MainWindow() : this(new Builder("MainWindow.glade"))

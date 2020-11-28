@@ -20,6 +20,7 @@
           <object class="GtkEntry" id="_classLibPath">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="editable">False</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
@@ -54,23 +55,37 @@
           <object class="GtkScrolledWindow">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="shadow_type">in</property>
+        <property name="shadow_type">in</property>                        
             <child>
-                      <object class="GtkVBox" id="_methodsContainer">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
+                <object class="GtkVBox" id="_methodsContainer">
+                  <property name="visible">True</property>
+                  <property name="can_focus">False</property>
+                </object>
+                <packing>
+                  <property name="left_attach">0</property>
+                  <property name="top_attach">0</property>
+                </packing>
+            </child>
+
           </object>
           <packing>
             <property name="left_attach">0</property>
             <property name="top_attach">0</property>
-            <property name="width">3</property>
+            <property name="width">4</property>
             <property name="height">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="_browseButton">
+            <property name="label" translatable="yes">Browse</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="Browse" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">2</property>
           </packing>
         </child>
       </object>
