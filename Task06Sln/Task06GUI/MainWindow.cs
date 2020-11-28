@@ -36,11 +36,21 @@ namespace Task06GUI
 
         private void AddPlayers()
         {
-            _technicses.Add(new VideoPlayer("SN1625", "256 RGB colors", (480, 320)));
-            _technicses.Add(new VideoPlayer("SN1623", "65635 RGB colors", (720, 480)));
-            _technicses.Add(new VideoPlayer("SN1645", "65635 RGB colors", (1080, 6720)));
-            _technicses.Add(new VideoPlayer("SN16789", "16M RGB colors", (1080, 1024)));
-            _technicses.Add(new VideoPlayer("SN162345", "16M RGB colors", (1920, 1080)));
+            _technicses.Add(new VideoPlayer("SN1625", 1024, 
+                new HashSet<VideoPlayer.VideoCodecs>{VideoPlayer.VideoCodecs.H_264},
+                new HashSet<VideoPlayer.AudioCodecs>{VideoPlayer.AudioCodecs.MP3}));
+            _technicses.Add(new VideoPlayer("SN1623", 1024, 
+                new HashSet<VideoPlayer.VideoCodecs>{VideoPlayer.VideoCodecs.H_264,VideoPlayer.VideoCodecs.H_265},
+                new HashSet<VideoPlayer.AudioCodecs>{VideoPlayer.AudioCodecs.MP3, VideoPlayer.AudioCodecs.WMA}));
+            _technicses.Add(new VideoPlayer("SN1645", 2048, 
+                new HashSet<VideoPlayer.VideoCodecs>{VideoPlayer.VideoCodecs.H_264,VideoPlayer.VideoCodecs.H_265},
+                new HashSet<VideoPlayer.AudioCodecs>{VideoPlayer.AudioCodecs.MP3, VideoPlayer.AudioCodecs.WMA}));
+            _technicses.Add(new VideoPlayer("SN16789", 4096, 
+                new HashSet<VideoPlayer.VideoCodecs>{VideoPlayer.VideoCodecs.H_264,VideoPlayer.VideoCodecs.H_265, VideoPlayer.VideoCodecs.TS},
+                new HashSet<VideoPlayer.AudioCodecs>{VideoPlayer.AudioCodecs.MP3, VideoPlayer.AudioCodecs.WMA}));
+            _technicses.Add(new VideoPlayer("SN162345", 4096, 
+                new HashSet<VideoPlayer.VideoCodecs>{VideoPlayer.VideoCodecs.H_264,VideoPlayer.VideoCodecs.H_265, VideoPlayer.VideoCodecs.TS, VideoPlayer.VideoCodecs.MKV},
+                new HashSet<VideoPlayer.AudioCodecs>{VideoPlayer.AudioCodecs.MP3, VideoPlayer.AudioCodecs.WMA, VideoPlayer.AudioCodecs.FLAC}));
             setCurrentPlayer(_technicses[0]);
         }
 
