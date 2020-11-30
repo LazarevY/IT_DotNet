@@ -19,6 +19,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Task06Sln\TechnicsLib\TechnicsLib.csproj" />
       <ProjectReference Include="..\ReflectionsUtils\ReflectionsUtils.csproj" />
+      <ProjectReference Include="..\Widgets\Widgets.csproj" />
     </ItemGroup>
 
 </Project>

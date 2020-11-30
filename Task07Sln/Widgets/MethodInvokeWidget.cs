@@ -50,9 +50,16 @@ namespace Task07GUI
 
         private void Invoke(object? sender, EventArgs eventArgs)
         {
+            Console.WriteLine($"Invoke method {MethodInfo.Name}");
             var instance = Activator.CreateInstance(Type);
             var parameters = Widgets.Select(widget => widget.GetCurrentValue());
-            MethodInfo.Invoke(instance, parameters.ToArray());
+            object? invoke = MethodInfo.Invoke(instance, parameters.ToArray());
+            string ans = "nothing";
+            if (!(invoke is null))
+            {
+                ans = invoke.ToString();
+            }
+            Console.WriteLine($"Invoke method {MethodInfo.Name}. Return value: {ans}");
         }
     }
 }
