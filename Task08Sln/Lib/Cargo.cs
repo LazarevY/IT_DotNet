@@ -2,6 +2,6 @@ namespace Lib
 {
     public abstract class Cargo
     {
-        public int Capacity { get; set; }
+        public virtual int Capacity { get; set; }
     }
 }
