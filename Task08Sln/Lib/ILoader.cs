@@ -2,6 +2,8 @@ namespace Lib
 {
     public interface ILoader
     {
-        void Load(Cargo cargo);
+        bool Load(Cargo cargo);
+        void Load(Storage storage);
+        void Unload(Storage storage);
     }
 }

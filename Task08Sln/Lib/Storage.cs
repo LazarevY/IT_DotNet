@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lib
 {
-    public class Storage
+    public class Storage: IProcessLoader
     {
         public delegate void FullStorageHandler(Storage storage);
 
@@ -82,12 +82,18 @@ namespace Lib
                 {
                     ret = true;
                     var c = _cargoes[i];
+                    Filled -= c.Capacity;
                     _cargoes.RemoveAt(i);
                     maxCapacity -= c.Capacity;
                     cargoes.Add(c);
                 }
 
             return ret;
+        }
+
+        public void Process(ILoader loader)
+        {
+            loader.Load(this);
         }
     }
 }
