@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using Lib;
+using ModelsLib;
 
 namespace ConsoleTest
 {

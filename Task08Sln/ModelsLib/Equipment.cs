@@ -1,4 +1,4 @@
-namespace Lib
+namespace ModelsLib
 {
     public abstract class Equipment
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Lib
+namespace ModelsLib
 {
     public class SmallLoader : ILoader, ILogable
     {

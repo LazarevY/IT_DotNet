@@ -1,6 +1,6 @@
 using System.Threading;
 
-namespace Lib
+namespace ModelsLib
 {
     public class HardMechanic : IMechanic, ILogable
     {

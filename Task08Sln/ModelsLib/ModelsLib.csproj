@@ -7,8 +7,8 @@
         <ProjectGuid>{455BC2EB-DDCB-4103-94C1-F1FABA508893}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Lib</RootNamespace>
-        <AssemblyName>Lib</AssemblyName>
+        <RootNamespace>ModelsLib</RootNamespace>
+        <AssemblyName>ModelsLib</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>8</LangVersion>

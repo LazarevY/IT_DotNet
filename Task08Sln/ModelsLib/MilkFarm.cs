@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lib
+namespace ModelsLib
 {
     public class MilkFarm : IModel, ILogable, IProcessLoader
     {

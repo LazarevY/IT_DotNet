@@ -1,4 +1,4 @@
-namespace Lib
+namespace ModelsLib
 {
     public interface IModel
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Lib
+namespace ModelsLib
 {
     public class Storage: IProcessLoader
     {

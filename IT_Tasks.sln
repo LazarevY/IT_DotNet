@@ -48,7 +48,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Widgets", "Task07Sln\Widget
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task08Sln", "Task08Sln", "{B251AFF3-E49A-48E9-8F7B-0FA223F05E62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Task08Sln\Lib\Lib.csproj", "{455BC2EB-DDCB-4103-94C1-F1FABA508893}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelsLib", "Task08Sln\ModelsLib\ModelsLib.csproj", "{455BC2EB-DDCB-4103-94C1-F1FABA508893}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "Task08Sln\ConsoleTest\ConsoleTest.csproj", "{26A3EE6C-B7AA-43AE-9242-21CA6CA49893}"
 EndProject
