@@ -15,6 +15,7 @@ namespace ModelRun
             Vector farmLocation,
             Vector farmStorageLocation)
         {
+            ModelManager = modelManager;
             var storage = new Storage(storageCapacity);
             StorageObject = new StorageObject
             {
@@ -32,9 +33,13 @@ namespace ModelRun
             farm.EquipmentBroken += equipment =>
             {
                 var acquireMechanic = modelManager.AcquireMechanic();
-                acquireMechanic.TargetEquipment = equipment;
+                acquireMechanic.SetTargetEquipment(equipment);
             };
-            FarmObject = new FarmObject {Farm = farm};
+            FarmObject = new FarmObject
+            {
+                Farm = farm,
+                Location = farmLocation
+            };
 
             StorageObject.FullStorageObject += processObject =>
             {

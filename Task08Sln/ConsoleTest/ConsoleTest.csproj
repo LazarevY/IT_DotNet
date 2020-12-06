@@ -43,9 +43,17 @@
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\ModelRun\ModelRun.csproj">
+        <Project>{42267235-0af0-46cf-9413-ce25e50d4ac4}</Project>
+        <Name>ModelRun</Name>
+      </ProjectReference>
       <ProjectReference Include="..\ModelsLib\ModelsLib.csproj">
         <Project>{455bc2eb-ddcb-4103-94c1-f1faba508893}</Project>
         <Name>ModelsLib</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\ModelsObjectsLib\ModelsObjectsLib.csproj">
+        <Project>{f3b6805e-ff9a-41f9-9828-dc47faacc725}</Project>
+        <Name>ModelsObjectsLib</Name>
       </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

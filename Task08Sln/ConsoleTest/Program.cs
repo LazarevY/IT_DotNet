@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using ModelsLib;
+using ModelsObjectsLib;
+using Model = ModelRun.ModelRun;
 
 namespace ConsoleTest
 {
@@ -8,24 +11,29 @@ namespace ConsoleTest
     {
         public static void Main(string[] args)
         {
-            Storage s = new Storage(30);
-            SmallLoader smallLoader = new SmallLoader();
-            smallLoader.ThrowMessage += Console.WriteLine;
-            MilkFarm farm = new MilkFarm {GenChance = 70, MilkStorage = s};
-            farm.MilkStorage.FullStorage += storage => storage.Process(new SmallLoader());
-            farm.ThrowMessage += Console.WriteLine;
-            HardMechanic mechanic = new HardMechanic();
-            mechanic.ThrowMessage += Console.WriteLine;
-            farm.EquipmentBroken += mechanic.Fix;
-            Thread t = new Thread(() =>
+            ModelManager modelManager = new ModelManager();
+            
+
+            Model modelRun = new Model(
+                5, 
+                60, 
+                25,
+                modelManager, 
+                new Vector(0,0),
+                new Vector(10, 0));
+            
+            Thread modelManageThread = new Thread(() =>
             {
                 while (true)
                 {
-                    farm.Update();
-                    Thread.Sleep(100);
+                    modelManager.Update();
+                    Thread.Sleep(500);
                 }
             });
-            t.Start();
+            
+            modelManageThread.Start();
+            modelRun.Run();
+
         }
     }
 }

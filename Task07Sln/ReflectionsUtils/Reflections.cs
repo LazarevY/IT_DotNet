@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -13,7 +14,7 @@ namespace ReflectionsUtils
         public Reflections(string pathToScan)
         {
             PathToScan = pathToScan;
-            Assembly = Assembly.LoadFrom(PathToScan);
+            Assembly = File.Exists(pathToScan) ? Assembly.LoadFrom(PathToScan) : Assembly.GetEntryAssembly();
         }
 
         public List<Type> AllImplementsOf(Type type)

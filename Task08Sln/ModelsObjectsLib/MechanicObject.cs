@@ -8,6 +8,7 @@ namespace ModelsObjectsLib
         
         public enum MechanicState
         {
+            WaitTarget, 
             Target,
             Fix,
             FixDone
@@ -15,9 +16,16 @@ namespace ModelsObjectsLib
 
         public IMechanic Mechanic { get; set; }
 
-        public MechanicState State { get; private set; } = MechanicState.Target;
+        public MechanicState State { get; private set; } = MechanicState.WaitTarget;
         
         public Equipment TargetEquipment { get; set; } = new MilkEquipment();
+
+
+        public void SetTargetEquipment(Equipment equipment)
+        {
+            TargetEquipment = equipment;
+            State = MechanicState.Target;
+        }
         public override bool InTheObjectArea(Vector vector)
         {
             return Location.Subtract(vector).Norm() < 2;

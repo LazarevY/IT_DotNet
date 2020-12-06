@@ -39,6 +39,8 @@ namespace ModelsObjectsLib
         {
             var loaderObject = CreateObject<LoaderObject>();
             loaderObject.Loader = new SmallLoader();
+            loaderObject.Location = LoaderBaseObject.Location;
+            loaderObject.Speed = 20;
             loaderObject.LoaderBase = LoaderBaseObject;
             loaderObject.TargetObject = LoaderBaseObject;
             loaderObject.State = LoaderObject.LoaderState.Wait;
