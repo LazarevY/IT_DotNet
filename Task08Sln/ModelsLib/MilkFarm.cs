@@ -11,6 +11,9 @@ namespace ModelsLib
 
         private readonly Random _random = new Random();
         private Storage _internalStorage = new Storage(10);
+        private bool _mechanicCalled;
+
+        private bool _releaseCalled;
 
         public Storage MilkStorage { get; set; }
 
@@ -18,6 +21,8 @@ namespace ModelsLib
 
 
         public int GenChance { get; set; } = 40;
+
+        public int BrokeChance { get; set; }
 
         public event ILogable.MessageHandler ThrowMessage;
 
@@ -39,17 +44,25 @@ namespace ModelsLib
             if (MilkStorage.IsFull)
             {
                 ThrowMessage?.Invoke("Некуда!");
+                if (_releaseCalled) return;
                 MilkStorage.Release();
+                _releaseCalled = true;
                 return;
             }
+
+            _releaseCalled = false;
 
 
             if (!Equipment.Enabled)
             {
                 ThrowMessage?.Invoke("Наташа мы все уронили");
+                if (_mechanicCalled) return;
+                _mechanicCalled = true;
                 EquipmentBroken?.Invoke(Equipment);
                 return;
             }
+
+            _mechanicCalled = false;
 
 
             if (_random.Next(1, 100) > GenChance) return;
@@ -57,7 +70,7 @@ namespace ModelsLib
 
 
             ThrowMessage?.Invoke($"Storage filled: {MilkStorage.Filled}");
-            if (_random.Next(1, 100) > 20) return;
+            if (_random.Next(1, 100) > BrokeChance) return;
             BreakEquipment();
         }
 
