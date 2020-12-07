@@ -17,11 +17,9 @@ namespace ModelRun
         {
             ModelManager = modelManager;
             var storage = new Storage(storageCapacity);
-            StorageObject = new StorageObject
-            {
-                Location = farmStorageLocation,
-                ProcessLoader = storage
-            };
+            StorageObject = modelManager.CreateObject<StorageObject>(false);
+            StorageObject.Location = farmStorageLocation;
+            StorageObject.ProcessLoader = storage;
 
             var farm = new MilkFarm
             {
@@ -34,12 +32,11 @@ namespace ModelRun
             {
                 var acquireMechanic = modelManager.AcquireMechanic();
                 acquireMechanic.SetTargetEquipment(equipment);
+                acquireMechanic.Location = farmLocation;
             };
-            FarmObject = new FarmObject
-            {
-                Farm = farm,
-                Location = farmLocation
-            };
+            FarmObject = modelManager.CreateObject<FarmObject>(false);
+            FarmObject.Farm = farm;
+            FarmObject.Location = farmLocation;
 
             StorageObject.FullStorageObject += processObject =>
             {

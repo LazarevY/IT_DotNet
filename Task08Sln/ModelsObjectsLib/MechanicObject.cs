@@ -19,12 +19,13 @@ namespace ModelsObjectsLib
         public MechanicState State { get; private set; } = MechanicState.WaitTarget;
         
         public Equipment TargetEquipment { get; set; } = new MilkEquipment();
-
+        
 
         public void SetTargetEquipment(Equipment equipment)
         {
             TargetEquipment = equipment;
             State = MechanicState.Target;
+            Location = new Vector(60, 60);
         }
         public override bool InTheObjectArea(Vector vector)
         {
