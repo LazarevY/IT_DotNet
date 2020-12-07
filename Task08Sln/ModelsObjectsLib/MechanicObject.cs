@@ -17,7 +17,9 @@ namespace ModelsObjectsLib
         public IMechanic Mechanic { get; set; }
 
         public MechanicState State { get; private set; } = MechanicState.WaitTarget;
-        
+
+        public override int ZCoord { get; set; } = -1;
+
         public Equipment TargetEquipment { get; set; } = new MilkEquipment();
         
 

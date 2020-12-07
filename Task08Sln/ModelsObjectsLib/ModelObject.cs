@@ -11,6 +11,8 @@ namespace ModelsObjectsLib
         
         public uint Id { get; private set; }
 
+        public virtual int ZCoord { get; set; } = 0;
+
         public virtual void OnRemove()
         {
             

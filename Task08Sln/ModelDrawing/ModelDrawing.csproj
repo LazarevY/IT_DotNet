@@ -85,6 +85,10 @@
         <Project>{c69e5648-7c83-4714-98ab-15654fa97dc4}</Project>
         <Name>ReflectionsUtils</Name>
       </ProjectReference>
+      <ProjectReference Include="..\ModelsLib\ModelsLib.csproj">
+        <Project>{455bc2eb-ddcb-4103-94c1-f1faba508893}</Project>
+        <Name>ModelsLib</Name>
+      </ProjectReference>
       <ProjectReference Include="..\ModelsObjectsLib\ModelsObjectsLib.csproj">
         <Project>{f3b6805e-ff9a-41f9-9828-dc47faacc725}</Project>
         <Name>ModelsObjectsLib</Name>

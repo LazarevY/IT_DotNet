@@ -17,7 +17,7 @@ namespace ModelsLib
             Available = capacity;
         }
 
-        public int Capacity { get; }
+        public int Capacity { get; set; }
 
         public bool IsFull => Filled == Capacity;
 

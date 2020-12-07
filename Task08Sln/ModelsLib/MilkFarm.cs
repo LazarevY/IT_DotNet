@@ -17,7 +17,7 @@ namespace ModelsLib
 
         public Storage MilkStorage { get; set; }
 
-        private MilkEquipment Equipment { get; } = new MilkEquipment();
+        public MilkEquipment Equipment { get; } = new MilkEquipment();
 
 
         public int GenChance { get; set; } = 40;

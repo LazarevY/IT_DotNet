@@ -60,8 +60,11 @@ namespace ModelRun
         public StorageObject StorageObject { get; set; }
         public ModelManager ModelManager { get; set; }
 
+        public bool IsActive { get; private set; } = false;
+
         public void Run()
         {
+            IsActive = true;
             ModelThread.Start();
         }
     }

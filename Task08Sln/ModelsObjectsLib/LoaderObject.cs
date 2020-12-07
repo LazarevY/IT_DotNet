@@ -16,11 +16,13 @@ namespace ModelsObjectsLib
 
         public LoaderProcessObject LoaderBase{ get; set; }
 
+        public override int ZCoord { get; set; } = -1;
+
         public ILoader Loader { get; set; }
 
         public LoaderProcessObject TargetObject { get; set; }
 
-        public int Speed { get; set; }
+        public int Speed { get; set; } = 30;
 
         public LoaderState State { get; set; } = LoaderState.Wait;
 
@@ -43,7 +45,8 @@ namespace ModelsObjectsLib
                     break;
                 case LoaderState.Return:
                     MoveToTarget();
-                    ChangeStateIfInTheAreaObject(LoaderState.Wait);
+                    if (ChangeStateIfInTheAreaObject(LoaderState.Wait))
+                        ObjState = ObjectState.Removed;
                     break;
 
             }
@@ -65,10 +68,15 @@ namespace ModelsObjectsLib
             TargetObject = LoaderBase;
         }
 
-        private void ChangeStateIfInTheAreaObject(LoaderState state)
+        private bool ChangeStateIfInTheAreaObject(LoaderState state)
         {
             if (TargetObject.InTheObjectArea(Location))
+            {
                 State = state;
+                return true;
+            }
+
+            return false;
         }
 
         private void MoveToTarget()

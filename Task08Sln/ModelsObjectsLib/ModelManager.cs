@@ -21,7 +21,7 @@ namespace ModelsObjectsLib
         public ModelManager()
         {
             LoaderBaseObject = CreateObject<LoaderBaseObject>();
-            LoaderBaseObject.Location = new Vector(200, 50);
+            LoaderBaseObject.Location = new Vector(360, 300);
         }
 
         public T CreateObject<T>(bool needUpdate = true)
@@ -49,7 +49,6 @@ namespace ModelsObjectsLib
             var loaderObject = CreateObject<LoaderObject>(needUpdate);
             loaderObject.Loader = new SmallLoader();
             loaderObject.Location = LoaderBaseObject.Location;
-            loaderObject.Speed = 20;
             loaderObject.LoaderBase = LoaderBaseObject;
             loaderObject.TargetObject = LoaderBaseObject;
             loaderObject.State = LoaderObject.LoaderState.Wait;

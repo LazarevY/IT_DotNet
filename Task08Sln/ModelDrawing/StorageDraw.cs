@@ -9,12 +9,17 @@ namespace ModelDrawing
         {
             context.LineWidth = 2;
             var loc = model.Location;
-            int width = 30;
-            int height = 30;
+            int width = 50;
+            int height = 50;
             context.Rectangle(loc.X - width, loc.Y - height, width * 2, height  * 2);
             context.SetSourceRGB(0, 1, 0);
-            context.Stroke();
-            context.GetTarget().Dispose();
+            context.Fill();
+            int available = (int) ((double)model.Storage.Available / model.Storage.Capacity * height);
+            
+
+            context.SetSourceRGB(1,1,1);
+            context.Rectangle(loc.X - width, loc.Y - height + available, width * 2, (height - available)  * 2);
+            context.Fill();
         }
     }
 }
