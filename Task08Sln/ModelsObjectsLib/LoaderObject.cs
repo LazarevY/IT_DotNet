@@ -7,14 +7,14 @@ namespace ModelsObjectsLib
     {
         public enum LoaderState
         {
-            ToStorage,
-            Return,
-            Full,
-            Wait,
-            Load
+            Wait = 0,
+            Return = 1,
+            Load = 2,
+            ToStorage = 3,
+            ReturnFull = 4
         }
 
-        public LoaderProcessObject LoaderBase{ get; set; }
+        public LoaderProcessObject LoaderBase { get; set; }
 
         public override int ZCoord { get; set; } = -1;
 
@@ -44,27 +44,26 @@ namespace ModelsObjectsLib
                     LoadAction();
                     break;
                 case LoaderState.Return:
+                case LoaderState.ReturnFull:
                     MoveToTarget();
-                    if (ChangeStateIfInTheAreaObject(LoaderState.Wait))
-                        ObjState = ObjectState.Removed;
+                    ChangeStateIfInTheAreaObject(LoaderState.Wait);
                     break;
-
             }
         }
 
         public bool GoToObject(LoaderProcessObject loaderProcessObject)
         {
-            if (State == LoaderState.Full || State == LoaderState.Load || State == LoaderState.ToStorage)
+            if (State == LoaderState.ReturnFull || State == LoaderState.Load || State == LoaderState.ToStorage)
                 return false;
             TargetObject = loaderProcessObject;
             State = LoaderState.ToStorage;
             return true;
         }
 
-        private void LoadAction()
+        protected virtual void LoadAction()
         {
             TargetObject.Process(Loader);
-            State = LoaderState.Return;
+            State = Loader.IsFull ? LoaderState.ReturnFull : LoaderState.Return;
             TargetObject = LoaderBase;
         }
 
@@ -83,8 +82,9 @@ namespace ModelsObjectsLib
         {
             var dir = TargetObject.Location.Subtract(Location);
             var distance = dir.Norm();
-            Location = Location.Add(distance < Speed ? 
-                dir.Normalized().Multiply(distance) : dir.Normalized().Multiply(Speed));
+            Location = Location.Add(distance < Speed
+                ? dir.Normalized().Multiply(distance)
+                : dir.Normalized().Multiply(Speed));
             Console.WriteLine($"Loader location: {Location}");
         }
     }

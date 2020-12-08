@@ -5,7 +5,9 @@ namespace ModelsLib
     public class SmallLoader : ILoader, ILogable
     {
         private readonly Storage _storage = new Storage(20);
-            public bool Load(Cargo cargo)
+        public bool IsFull { get =>_storage.IsFull; }
+
+        public bool Load(Cargo cargo)
             {
                 return _storage.Add(cargo);
             }

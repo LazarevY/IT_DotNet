@@ -46,6 +46,7 @@
         <Compile Include="MechanicObject.cs" />
         <Compile Include="ModelObject.cs" />
         <Compile Include="ModelManager.cs" />
+        <Compile Include="SynchronizedLoaderObject.cs" />
         <Compile Include="Vector.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="StorageObject.cs" />

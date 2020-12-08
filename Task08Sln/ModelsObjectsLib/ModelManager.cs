@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using ModelsLib;
 using ReflectionsUtils;
 
@@ -12,6 +13,8 @@ namespace ModelsObjectsLib
         
         private ConcurrentDictionary<uint, ModelObject> UpdateModelObjects = new ConcurrentDictionary<uint, ModelObject>();
         public ConcurrentDictionary<uint, ModelObject> AllModelObjects { get; } = new ConcurrentDictionary<uint, ModelObject>();
+        
+        public List<SynchronizedLoaderObject> _loaderObjects = new List<SynchronizedLoaderObject>();
 
         private LoaderBaseObject LoaderBaseObject;
         public Reflections Reflections { get; set; } = new Reflections("");
@@ -22,6 +25,22 @@ namespace ModelsObjectsLib
         {
             LoaderBaseObject = CreateObject<LoaderBaseObject>();
             LoaderBaseObject.Location = new Vector(360, 300);
+            
+            var loaderObject = CreateObject<SynchronizedLoaderObject>();
+            loaderObject.Loader = new SmallLoader();
+            loaderObject.Location = LoaderBaseObject.Location;
+            loaderObject.LoaderBase = LoaderBaseObject;
+            loaderObject.TargetObject = LoaderBaseObject;
+            loaderObject.State = LoaderObject.LoaderState.Wait;
+            
+            _loaderObjects.Add(loaderObject);
+            loaderObject = CreateObject<SynchronizedLoaderObject>();
+            loaderObject.Loader = new SmallLoader();
+            loaderObject.Location = LoaderBaseObject.Location;
+            loaderObject.LoaderBase = LoaderBaseObject;
+            loaderObject.TargetObject = LoaderBaseObject;
+            loaderObject.State = LoaderObject.LoaderState.Wait;
+            _loaderObjects.Add(loaderObject);
         }
 
         public T CreateObject<T>(bool needUpdate = true)
@@ -46,13 +65,11 @@ namespace ModelsObjectsLib
 
         public LoaderObject AcquireLoader(bool needUpdate = true)
         {
-            var loaderObject = CreateObject<LoaderObject>(needUpdate);
-            loaderObject.Loader = new SmallLoader();
-            loaderObject.Location = LoaderBaseObject.Location;
-            loaderObject.LoaderBase = LoaderBaseObject;
-            loaderObject.TargetObject = LoaderBaseObject;
-            loaderObject.State = LoaderObject.LoaderState.Wait;
-            return loaderObject;
+            var synchronizedLoaderObjects = 
+                _loaderObjects.OrderBy(val => (int)val.State).ToList();
+            var synchronizedLoaderObject = synchronizedLoaderObjects[0];
+            synchronizedLoaderObject.AcquireLoaderObject();
+            return synchronizedLoaderObject;
         }
 
         public void Update()
