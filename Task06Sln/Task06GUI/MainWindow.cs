@@ -70,6 +70,8 @@ namespace Task06GUI
         {
             --_index;
             UpdateIndexPolicy();
+            if (_technicses.Count == 0)
+                return;
             SetCurrentPlayer(_technicses[_index]);
         }
 
@@ -77,6 +79,8 @@ namespace Task06GUI
         {
             ++_index;
             UpdateIndexPolicy();
+            if (_technicses.Count == 0)
+                return;
             SetCurrentPlayer(_technicses[_index]);
         }
 
@@ -175,10 +179,8 @@ namespace Task06GUI
                 _index = 0;
                 return;
             }
-            if (_index >= _technicses.Count)
-                _index = 0;
-            if (_index < 0)
-                _index = _technicses.Count - 1;
+
+            _index = (_index + _technicses.Count) % _technicses.Count;
         }
 
 
