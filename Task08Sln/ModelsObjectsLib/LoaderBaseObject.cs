@@ -11,7 +11,7 @@ namespace ModelsObjectsLib
 
         public override void Process(ILoader loader)
         {
-            
+            loader.Unload(new Storage(1000000));
         }
     }
 }

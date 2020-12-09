@@ -27,7 +27,7 @@ namespace ModelRun
                 GenChance = milkGenChance,
                 BrokeChance = brokeChance
             };
-            farm.ThrowMessage += Console.WriteLine;
+            //farm.ThrowMessage += Console.WriteLine;
             farm.EquipmentBroken += equipment =>
             {
                 var acquireMechanic = modelManager.AcquireMechanic();

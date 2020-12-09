@@ -32,10 +32,10 @@ namespace ModelsObjectsLib
             loaderObject.LoaderBase = LoaderBaseObject;
             loaderObject.TargetObject = LoaderBaseObject;
             loaderObject.State = LoaderObject.LoaderState.Wait;
-            
             _loaderObjects.Add(loaderObject);
+            
             loaderObject = CreateObject<SynchronizedLoaderObject>();
-            loaderObject.Loader = new SmallLoader();
+            loaderObject.Loader = new BigLoader();
             loaderObject.Location = LoaderBaseObject.Location;
             loaderObject.LoaderBase = LoaderBaseObject;
             loaderObject.TargetObject = LoaderBaseObject;

@@ -39,6 +39,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="BigLoader.cs" />
         <Compile Include="Cargo.cs" />
         <Compile Include="Equipment.cs" />
         <Compile Include="HardMechanic.cs" />
@@ -46,6 +47,7 @@
         <Compile Include="ILogable.cs" />
         <Compile Include="IMechanic.cs" />
         <Compile Include="IModel.cs" />
+        <Compile Include="InfinityLoader.cs" />
         <Compile Include="IProcessLoader.cs" />
         <Compile Include="Milk.cs" />
         <Compile Include="MilkEquipment.cs" />

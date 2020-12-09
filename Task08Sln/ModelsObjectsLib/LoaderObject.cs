@@ -46,7 +46,12 @@ namespace ModelsObjectsLib
                 case LoaderState.Return:
                 case LoaderState.ReturnFull:
                     MoveToTarget();
-                    ChangeStateIfInTheAreaObject(LoaderState.Wait);
+                    if (TargetObject.InTheObjectArea(Location))
+                    {
+                        LoaderBase.Process(Loader);
+                        State = LoaderState.Wait;
+                        
+                    }
                     break;
             }
         }
@@ -67,7 +72,7 @@ namespace ModelsObjectsLib
             TargetObject = LoaderBase;
         }
 
-        private bool ChangeStateIfInTheAreaObject(LoaderState state)
+        protected bool ChangeStateIfInTheAreaObject(LoaderState state)
         {
             if (TargetObject.InTheObjectArea(Location))
             {
@@ -78,14 +83,14 @@ namespace ModelsObjectsLib
             return false;
         }
 
-        private void MoveToTarget()
+        protected void MoveToTarget()
         {
             var dir = TargetObject.Location.Subtract(Location);
             var distance = dir.Norm();
             Location = Location.Add(distance < Speed
                 ? dir.Normalized().Multiply(distance)
                 : dir.Normalized().Multiply(Speed));
-            Console.WriteLine($"Loader location: {Location}");
+            //Console.WriteLine($"Loader location: {Location}");
         }
     }
 }

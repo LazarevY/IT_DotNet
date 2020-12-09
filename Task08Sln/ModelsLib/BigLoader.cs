@@ -2,15 +2,15 @@ using System.Collections.Generic;
 
 namespace ModelsLib
 {
-    public class SmallLoader : ILoader, ILogable
+    public class BigLoader : ILoader
     {
-        private readonly Storage _storage = new Storage(5);
-        public bool IsFull { get =>_storage.IsFull; }
+        private readonly Storage _storage = new Storage(60);
+        public bool IsFull => _storage.IsFull;
 
         public bool Load(Cargo cargo)
-            {
-                return _storage.Add(cargo);
-            }
+        {
+            return _storage.Add(cargo);
+        }
 
         public void Load(Storage storage)
         {

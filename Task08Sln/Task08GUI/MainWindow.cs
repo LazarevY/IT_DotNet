@@ -145,11 +145,19 @@ namespace Task08GUI
                 while (true)
                 {
                     ModelManager.Update();
-                    _drawArea.QueueDraw();
                     Thread.Sleep(500);
                 }
             });
+            var t2 = new Thread(() =>
+            {
+                while (true)
+                {
+                    _drawArea.QueueDraw();
+                    Thread.Sleep(250);
+                }
+            });
             t.Start();
+            t2.Start();
         }
 
 

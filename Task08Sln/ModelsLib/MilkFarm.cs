@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace ModelsLib
 {
@@ -14,6 +15,7 @@ namespace ModelsLib
         private bool _mechanicCalled;
 
         private bool _releaseCalled;
+        private bool _canWork = true;
 
         public Storage MilkStorage { get; set; }
 
@@ -41,28 +43,32 @@ namespace ModelsLib
 
         private void GenerateMilk()
         {
-            if (MilkStorage.IsFull)
-            {
-                ThrowMessage?.Invoke("Некуда!");
-                if (_releaseCalled) return;
-                MilkStorage.Release();
-                _releaseCalled = true;
-                return;
-            }
-
-            _releaseCalled = false;
-
-
+            _canWork = true;
             if (!Equipment.Enabled)
             {
                 ThrowMessage?.Invoke("Наташа мы все уронили");
                 if (_mechanicCalled) return;
                 _mechanicCalled = true;
                 EquipmentBroken?.Invoke(Equipment);
-                return;
+                _canWork = false;
             }
 
+            
+            
+            if (MilkStorage.IsFull)
+            {
+                ThrowMessage?.Invoke("Некуда!");
+                if (_releaseCalled) return;
+                MilkStorage.Release();
+                _releaseCalled = true;
+                _canWork = false;
+            }
+            
+            if (!_canWork)
+                return;
+            
             _mechanicCalled = false;
+            _releaseCalled = false;
 
 
             if (_random.Next(1, 100) > GenChance) return;
