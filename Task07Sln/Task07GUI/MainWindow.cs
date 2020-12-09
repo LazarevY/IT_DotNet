@@ -22,7 +22,7 @@ namespace Task07GUI
 
         private void ScanLib(object? sender, EventArgs eventArgs)
         {
-            _reflections = new Reflections("/home/lazarev/RiderProjects/IT_Tasks/IT_DotNet/Task06Sln/TechnicsLib/bin/Debug/TechnicsLib.dll");
+            _reflections = new Reflections(_classLibPath.Text);
             var allImplementsOf = _reflections.AllImplementsOf(typeof(ITechnics));
             
             _classComboBox.Clear();
