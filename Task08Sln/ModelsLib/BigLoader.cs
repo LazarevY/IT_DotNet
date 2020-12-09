@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace ModelsLib
 {
-    public class SmallLoader : ILoader, ILogable
+    public class BigLoader : ILoader
     {
-        private readonly Storage _storage = new Storage(20);
-            public bool Load(Cargo cargo)
-            {
-                return _storage.Add(cargo);
-            }
+        private readonly Storage _storage = new Storage(60);
+        public bool Load(Cargo cargo)
+        {
+            return _storage.Add(cargo);
+        }
 
         public void Load(Storage storage)
         {

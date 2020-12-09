@@ -46,7 +46,11 @@ namespace ModelsObjectsLib
                 case LoaderState.Return:
                     MoveToTarget();
                     if (ChangeStateIfInTheAreaObject(LoaderState.Wait))
+                    {
+                        LoaderBase.Process(Loader);
                         ObjState = ObjectState.Removed;
+                    }
+
                     break;
 
             }

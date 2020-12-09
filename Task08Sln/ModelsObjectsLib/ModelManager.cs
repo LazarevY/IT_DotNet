@@ -47,7 +47,19 @@ namespace ModelsObjectsLib
         public LoaderObject AcquireLoader(bool needUpdate = true)
         {
             var loaderObject = CreateObject<LoaderObject>(needUpdate);
-            loaderObject.Loader = new SmallLoader();
+            
+            if (new Random().Next(0, 20 ) < 10)
+                loaderObject.Loader = new SmallLoader();
+            else
+            {
+                if (new Random().Next(0, 20 ) < 10)
+                    loaderObject.Loader = new BigLoader();
+                else
+                {
+                    loaderObject.Loader = new InfinityLoader();
+                }
+            }
+
             loaderObject.Location = LoaderBaseObject.Location;
             loaderObject.LoaderBase = LoaderBaseObject;
             loaderObject.TargetObject = LoaderBaseObject;
