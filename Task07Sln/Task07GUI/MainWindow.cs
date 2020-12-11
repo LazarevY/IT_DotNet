@@ -32,11 +32,11 @@ namespace Task07GUI
             foreach (var type in allImplementsOf)
             {
                 var iter = model.AppendValues(type.Name, type);
-                CellRendererText c = new CellRendererText();
-                _classComboBox.PackStart(c, true);
-                _classComboBox.AddAttribute(c, "text", 0);
             }
             
+            CellRendererText c = new CellRendererText();
+            _classComboBox.PackStart(c, true);
+            _classComboBox.AddAttribute(c, "text", 0);
             _classComboBox.Model = model;
 
         }
