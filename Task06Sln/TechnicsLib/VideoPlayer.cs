@@ -33,12 +33,11 @@ namespace TechnicsLib
         }
 
         public VideoPlayer() : this(
-            "DEFAULT", 
-            16, 
+            "DEFAULT",
+            16,
             new HashSet<VideoCodecs> {VideoCodecs.H_264},
             new HashSet<AudioCodecs> {AudioCodecs.MP3})
         {
-            
         }
 
         public HashSet<VideoCodecs> PlayerVideoCodecs { get; }
@@ -92,7 +91,7 @@ namespace TechnicsLib
 
         public override string ToString()
         {
-            CodecsToString c = new CodecsToString();
+            var c = new CodecsToString();
             return $"I am Video player.\nMy S\\N is {SerialNumber}.\n" +
                    $"Support video codecs {c.Process(PlayerVideoCodecs)}.\nSupport audio codecs: {c.Process(PlayerAudioCodecs)}\n" +
                    $"Ram: {RamMB} MB";

@@ -9,23 +9,23 @@ namespace Task06GUI
 {
     internal class MainWindow : Window
     {
-        [UI] private Button _previousPlayerButton;
-        [UI] private Button _nextPlayerButton;
-        [UI] private Label _enabledStatusLabel;
-        [UI] private Button _onButton;
-        [UI] private Button _offButton;
-        [UI] private TextView _guiConsoleTextView;
-        [UI] private Label _infoLabel;
-        [UI] private Box _videoCodecsInContainer;
+        private readonly List<CheckButton> _audioCodecsChoices = new List<CheckButton>();
         [UI] private Box _audioCodecsInContainer;
+        private ITechnics _currentPlayer;
+        [UI] private Label _enabledStatusLabel;
+        [UI] private TextView _guiConsoleTextView;
+        private int _index;
+        [UI] private Label _infoLabel;
+        [UI] private Button _nextPlayerButton;
+        [UI] private Button _offButton;
+        [UI] private Button _onButton;
+        [UI] private Button _previousPlayerButton;
         [UI] private SpinButton _ramInput;
         [UI] private Entry _serailInput;
 
-        private List<ITechnics> _technicses;
-        private ITechnics _currentPlayer;
-        private int _index = 0;
-        private List<CheckButton> _vidCodecsChoices = new List<CheckButton>();
-        private List<CheckButton> _audioCodecsChoices = new List<CheckButton>();
+        private readonly List<ITechnics> _technicses;
+        private readonly List<CheckButton> _vidCodecsChoices = new List<CheckButton>();
+        [UI] private Box _videoCodecsInContainer;
 
         public MainWindow() : this(new Builder("MainWindow.glade"))
         {
@@ -98,29 +98,23 @@ namespace Task06GUI
 
         private void InitFields()
         {
-            foreach (var widget in _videoCodecsInContainer.Children)
-            {
-                _videoCodecsInContainer.Remove(widget);
-            }
+            foreach (var widget in _videoCodecsInContainer.Children) _videoCodecsInContainer.Remove(widget);
 
-            foreach (var widget in _audioCodecsInContainer.Children)
-            {
-                _audioCodecsInContainer.Remove(widget);
-            }
+            foreach (var widget in _audioCodecsInContainer.Children) _audioCodecsInContainer.Remove(widget);
 
             _videoCodecsInContainer.PackStart(new Label("Video codecs"), false, true, 3);
             _audioCodecsInContainer.PackStart(new Label("Audio codecs"), false, true, 3);
 
             foreach (var value in Enum.GetNames(typeof(VideoPlayer.VideoCodecs)))
             {
-                CheckButton b = new CheckButton(value);
+                var b = new CheckButton(value);
                 _vidCodecsChoices.Add(b);
                 _videoCodecsInContainer.PackStart(b, false, true, 3);
             }
 
             foreach (var value in Enum.GetNames(typeof(VideoPlayer.AudioCodecs)))
             {
-                CheckButton b = new CheckButton(value);
+                var b = new CheckButton(value);
                 _audioCodecsChoices.Add(b);
                 _audioCodecsInContainer.PackStart(b, false, true, 3);
             }
@@ -143,23 +137,20 @@ namespace Task06GUI
             if (audSet.Count == 0)
                 audSet.Add(VideoPlayer.AudioCodecs.MP3);
 
-            string sn = _serailInput.Text.Equals("") ? "DEFAULT" : _serailInput.Text;
+            var sn = _serailInput.Text.Equals("") ? "DEFAULT" : _serailInput.Text;
 
             _technicses.Add(new VideoPlayer(
-                    sn,
-                    _ramInput.ValueAsInt,
-                    vidSet,
-                    audSet
+                sn,
+                _ramInput.ValueAsInt,
+                vidSet,
+                audSet
             ));
             SetCurrentPlayer(_technicses[_index]);
         }
 
         private void RemovePlayer(object? sender, EventArgs eventArgs)
         {
-            if (_technicses.Count == 0)
-            {
-                return;
-            }
+            if (_technicses.Count == 0) return;
 
             _technicses.RemoveAt(_index);
             if (_technicses.Count == 0)
@@ -169,6 +160,7 @@ namespace Task06GUI
                 UpdateIndexPolicy();
                 return;
             }
+            UpdateIndexPolicy();
             SetCurrentPlayer(_technicses[_index]);
         }
 
