@@ -116,14 +116,14 @@ namespace Task08GUI
                 95,
                 ModelManager,
                 new Vector(120, 100),
-                new Vector(240, 100)));
+                new Vector(290, 100)));
             _modelRuns.Add(new Model(
                 20,
                 60,
                 45,
                 ModelManager,
                 new Vector(480, 100),
-                new Vector(600, 100)));
+                new Vector(650, 100)));
 
             _modelRuns.Add(new Model(
                 20,
@@ -131,14 +131,14 @@ namespace Task08GUI
                 45,
                 ModelManager,
                 new Vector(120, 500),
-                new Vector(240, 500)));
+                new Vector(290, 500)));
             _modelRuns.Add(new Model(
                 20,
                 60,
                 45,
                 ModelManager,
                 new Vector(480, 500),
-                new Vector(600, 500)));
+                new Vector(650, 500)));
 
             var t = new Thread(() =>
             {

@@ -3,23 +3,26 @@ using ModelsObjectsLib;
 
 namespace ModelDrawing
 {
-    public class StorageDraw: ModelDraw<StorageObject>
+    public class StorageDraw : ModelDraw<StorageObject>
     {
+        private ImageSurface _storage = new ImageSurface("/home/lazarev/RiderProjects/IT_Tasks/IT_DotNet/Task08Sln/Pictures/storage.png");
         public override void Draw(StorageObject model, Context context)
         {
             context.LineWidth = 2;
             var loc = model.Location;
-            int width = 50;
-            int height = 50;
-            context.Rectangle(loc.X - width, loc.Y - height, width * 2, height  * 2);
-            context.SetSourceRGB(0, 1, 0);
-            context.Fill();
-            int available = (int) ((double)model.Storage.Available / model.Storage.Capacity * height);
-            
+            int width = 60;
+            int height = 60;
+            double wf = (double) width * 2 / _storage.Width;
+            double hf = (double) height * 2 / _storage.Height;
 
-            context.SetSourceRGB(1,1,1);
-            context.Rectangle(loc.X - width, loc.Y - height + available, width * 2, (height - available)  * 2);
-            context.Fill();
+            context.Scale(wf, hf);
+            context.SetSourceSurface(_storage, (int) ((loc.X - width) / wf), (int) ((loc.Y - height) / hf));
+            context.Paint();
+            context.Scale(1 / wf, 1 / hf);
+            context.SetSourceRGB(1, 1, 1);
+            context.SetFontSize(16);
+            context.MoveTo(loc.X - width, loc.Y + height + 15);
+            context.ShowText($"Storage fill: {model.Storage.Filled} / {model.Storage.Capacity}");
         }
     }
 }

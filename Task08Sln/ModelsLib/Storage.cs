@@ -10,6 +10,7 @@ namespace ModelsLib
         private readonly List<Cargo> _cargoes = new List<Cargo>();
         private int _available;
         private int _filled;
+        private int _capacity;
 
         public Storage(int capacity)
         {
@@ -17,7 +18,15 @@ namespace ModelsLib
             Available = capacity;
         }
 
-        public int Capacity { get; set; }
+        public int Capacity
+        {
+            get => _capacity;
+            set
+            {
+                _capacity = value;
+                Filled = _capacity - Available;
+            }
+        }
 
         public bool IsFull => Filled == Capacity;
 
