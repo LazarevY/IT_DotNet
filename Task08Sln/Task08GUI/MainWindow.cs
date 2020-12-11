@@ -14,6 +14,7 @@ namespace Task08GUI
     internal class MainWindow : Window
     {
         [UI] private Button _activateButton;
+        [UI] private Button _addButton;
         [UI] private SpinButton _brokeSpin;
         [UI] private SpinButton _capacitySpin;
 
@@ -52,6 +53,23 @@ namespace Task08GUI
         private void ChangeGen(object? sender, EventArgs eventArgs)
         {
             _modelRuns[_currentIndex].FarmObject.Farm.GenChance = _genSpin.ValueAsInt;
+        }
+        private void AddModel(object? sender, EventArgs eventArgs)
+        {
+            if (_modelRuns.Count >= 4)
+            {
+                Console.WriteLine("Max model count is 4");
+                return;
+            }
+            double x = 120 + 360 * (_modelRuns.Count % 2);
+            double y = 100 + 400 * (_modelRuns.Count / 2);
+            _modelRuns.Add(new Model(
+                _capacitySpin.ValueAsInt,
+                _genSpin.ValueAsInt,
+                _brokeSpin.ValueAsInt,
+                ModelManager,
+                new Vector(x, y),
+                new Vector(x + 170, y)));
         }
 
         private void ChangeBroke(object? sender, EventArgs eventArgs)
@@ -117,28 +135,28 @@ namespace Task08GUI
                 ModelManager,
                 new Vector(120, 100),
                 new Vector(290, 100)));
-            _modelRuns.Add(new Model(
-                20,
-                60,
-                45,
-                ModelManager,
-                new Vector(480, 100),
-                new Vector(650, 100)));
-
-            _modelRuns.Add(new Model(
-                20,
-                60,
-                45,
-                ModelManager,
-                new Vector(120, 500),
-                new Vector(290, 500)));
-            _modelRuns.Add(new Model(
-                20,
-                60,
-                45,
-                ModelManager,
-                new Vector(480, 500),
-                new Vector(650, 500)));
+            // _modelRuns.Add(new Model(
+            //     20,
+            //     60,
+            //     45,
+            //     ModelManager,
+            //     new Vector(480, 100),
+            //     new Vector(650, 100)));
+            //
+            // _modelRuns.Add(new Model(
+            //     20,
+            //     60,
+            //     45,
+            //     ModelManager,
+            //     new Vector(120, 500),
+            //     new Vector(290, 500)));
+            // _modelRuns.Add(new Model(
+            //     20,
+            //     60,
+            //     45,
+            //     ModelManager,
+            //     new Vector(480, 500),
+            //     new Vector(650, 500)));
 
             var t = new Thread(() =>
             {
